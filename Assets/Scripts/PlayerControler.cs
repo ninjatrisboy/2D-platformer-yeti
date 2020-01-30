@@ -18,12 +18,16 @@ public class PlayerControler : MonoBehaviour
 
     private Animator myAnim;
 
+    public Vector3 respawnPosition;
+
     // Start is called before the first frame update
     void Start()
     {
 
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
+
+        respawnPosition = transform.position;
     }   
 
     // Update is called once per frame
@@ -56,13 +60,21 @@ public class PlayerControler : MonoBehaviour
     }
 
 
-    void onTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
+
 
         if(other.tag == "KillPlane")
         {
+            //gameObject.SetActive(false);
 
-            gameObject.SetActive(false);
+            transform.position = respawnPosition;
+
+        }
+
+        if(other.tag == "Checkpoint")
+        {
+            respawnPosition = other.transform.position;
         }
     }
 }
