@@ -20,6 +20,8 @@ public class PlayerControler : MonoBehaviour
 
     public Vector3 respawnPosition;
 
+    public LevelManager theLevelManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,8 @@ public class PlayerControler : MonoBehaviour
         myAnim = GetComponent<Animator>();
 
         respawnPosition = transform.position;
+
+        theLevelManager = FindObjectOfType<LevelManager>();
     }   
 
     // Update is called once per frame
@@ -68,8 +72,9 @@ public class PlayerControler : MonoBehaviour
         {
             //gameObject.SetActive(false);
 
-            transform.position = respawnPosition;
+            //transform.position = respawnPosition;
 
+            theLevelManager.Respawn();
         }
 
         if(other.tag == "Checkpoint")
