@@ -6,6 +6,8 @@ public class HurtPlayer : MonoBehaviour
 {
     private LevelManager theLevelManager;
 
+    public int damageToGive;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,9 @@ public class HurtPlayer : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            theLevelManager.Respawn();
+            //theLevelManager.Respawn();
+
+            theLevelManager.HurtPlayer(damageToGive);
         }
     }
 }
