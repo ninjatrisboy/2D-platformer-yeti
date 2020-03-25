@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,7 +35,13 @@ public class LevelManager : MonoBehaviour
     private bool respawning;
 
 
+    public ResetOnRespawn[] objectsToReset;
 
+    public bool invincible;
+
+    public Text livesText;
+    public int startingLives;
+    public int currentLives;
 
 
     // Start is called before the first frame update
@@ -48,22 +53,39 @@ public class LevelManager : MonoBehaviour
 
         healthCount = maxHealth;
 
-    }
+        objectsToReset = FindObjectsOfType<ResetOnRespawn>();
 
+        currentLives = 3;
+        livesText.text = "Lives x " + startingLives;
+
+    }
+   
     // Update is called once per frame
     void Update()
-    {
+    {        
         if (healthCount <= 0 && !respawning)
         {
+            print("Health count: " + healthCount + " and CurrentLives:" + currentLives);
             Respawn();
-            respawning = true;
-
+            respawning = true;            
         }
     }
+
     public void Respawn()
     {
-        StartCoroutine("RespawnCo");
+        print("Respawining, currentLives: " + currentLives);
+        currentLives -= 1;
+        livesText.text = "Lives x " + currentLives;
 
+        if (currentLives > 0)
+        {
+            StartCoroutine("RespawnCo");
+
+           
+        }else{
+            thePlayer.gameObject.SetActive(false);
+
+        }
     }
 
     public IEnumerator RespawnCo()
@@ -78,9 +100,19 @@ public class LevelManager : MonoBehaviour
         respawning = false;
         UpdateHeartMeter();
 
+        coinCount = 0;
+        coinText.text = "Coins: " + coinCount;
 
+        
         thePlayer.transform.position = thePlayer.respawnPosition;
         thePlayer.gameObject.SetActive(true);
+
+        for (int i = 0; i < objectsToReset.Length; i++)
+        {
+            
+            objectsToReset[i].gameObject.SetActive(true);
+            objectsToReset[i].ResetObject();
+        }
     }
 
     public void AddCoins(int coinsToAdd)
@@ -92,8 +124,14 @@ public class LevelManager : MonoBehaviour
     }
     public void HurtPlayer(int damageToTake)
     {
-        healthCount -= damageToTake;
-        UpdateHeartMeter();
+
+        if (!invincible)
+        { 
+         healthCount -= damageToTake;
+         UpdateHeartMeter();
+
+         thePlayer.knockback();
+        }  
     }
 
     public void UpdateHeartMeter()

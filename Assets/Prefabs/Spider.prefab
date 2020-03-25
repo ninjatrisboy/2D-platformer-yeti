@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2816297964836943832}
   - component: {fileID: 2816297964836943826}
   - component: {fileID: 2816297964836943827}
+  - component: {fileID: -4238263401300437844}
   m_Layer: 0
   m_Name: Spider
   m_TagString: Enemy
@@ -190,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 831273ad51e704e3ba19279ad8f415f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 2.5
 --- !u!114 &2816297964836943827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,3 +205,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageToGive: 1
+--- !u!114 &-4238263401300437844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2816297964836943835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48611d7c181fc4763a0f95bd3ceafb4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
