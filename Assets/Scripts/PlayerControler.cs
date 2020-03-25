@@ -130,6 +130,7 @@ public class PlayerControler : MonoBehaviour
             //gameObject.SetActive(false);
 
             //transform.position = respawnPosition;
+            print("Respawn called from player controller");
 
             theLevelManager.Respawn();
         }
