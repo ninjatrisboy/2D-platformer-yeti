@@ -43,6 +43,9 @@ public class LevelManager : MonoBehaviour
     public int startingLives;
     public int currentLives;
 
+    public GameObject gameOverScreen;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -84,6 +87,8 @@ public class LevelManager : MonoBehaviour
            
         }else{
             thePlayer.gameObject.SetActive(false);
+
+            gameOverScreen.SetActive(true);
 
         }
     }
@@ -133,6 +138,19 @@ public class LevelManager : MonoBehaviour
          thePlayer.knockback();
         }  
     }
+
+    public void GiveHealth(int healthToGive)
+    {
+        healthCount += healthToGive;
+
+        if (healthCount > maxHealth)
+        {
+            healthCount = maxHealth;
+        }
+
+        UpdateHeartMeter();
+    }
+
 
     public void UpdateHeartMeter()
     {
