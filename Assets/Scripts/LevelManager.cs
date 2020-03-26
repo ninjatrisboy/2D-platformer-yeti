@@ -55,8 +55,8 @@ public class LevelManager : MonoBehaviour
 
         objectsToReset = FindObjectsOfType<ResetOnRespawn>();
 
-        currentLives = 3;
-        livesText.text = "Lives x " + startingLives;
+        currentLives = startingLives;
+        livesText.text = "Lives x " + currentLives;
 
     }
    
@@ -186,5 +186,13 @@ public class LevelManager : MonoBehaviour
                 heart3.sprite = heartEmpty;
                 return;
         }
+    }
+
+    public void AddLives(int livesToAdd)
+    {
+        currentLives += livesToAdd;
+        livesText.text = "Lives x " + currentLives;
+
+
     }
 }
