@@ -146,6 +146,8 @@ public class LevelManager : MonoBehaviour
          UpdateHeartMeter();
 
          thePlayer.knockback();
+
+            thePlayer.hurtSound.Play();
         }  
     }
 

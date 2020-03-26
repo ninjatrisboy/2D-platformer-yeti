@@ -31,6 +31,9 @@ public class PlayerControler : MonoBehaviour
     public float invincibilityLength;
     private float invincibilityCounter;
 
+    public AudioSource jumpSound;
+    public AudioSource hurtSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,7 +74,7 @@ public class PlayerControler : MonoBehaviour
             if (Input.GetButtonDown("Jump") && isGrounded)
             {
                 myRigidbody.velocity = new Vector3(myRigidbody.velocity.x, jumpSpeed, 0f);
-
+                jumpSound.Play();
             }
 
 
