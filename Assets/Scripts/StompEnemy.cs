@@ -6,13 +6,18 @@ public class StompEnemy : MonoBehaviour
 {
     private Rigidbody2D playerRigidbody;
 
+    private LevelManager theLevelManager;
+
     public float bounceForce;
 
     public GameObject deathSplosion;
 
+    public int coinKillcount;
+
     // Start is called before the first frame update
     void Start()
     {
+        theLevelManager = FindObjectOfType<LevelManager>();
         playerRigidbody = transform.parent.GetComponent<Rigidbody2D>();
     }
 
@@ -26,6 +31,8 @@ public class StompEnemy : MonoBehaviour
         if (other.tag == "Enemy")
         {
             // Destroy(other.gameObject);
+
+            theLevelManager.AddCoins(coinKillcount);
 
             other.gameObject.SetActive(false);
 
