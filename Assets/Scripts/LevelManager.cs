@@ -6,7 +6,7 @@ public class LevelManager : MonoBehaviour
 {
 
     public float waitToRespawn;
-    public PlayerControler thePlayer;
+    public PlayerController thePlayer;
 
     public GameObject deathSplosion;
 
@@ -51,6 +51,7 @@ public class LevelManager : MonoBehaviour
 
     public AudioSource levelMusic;
     public AudioSource gameOverMusic;
+    public int coinsToTake;
 
 
 
@@ -58,7 +59,7 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        thePlayer = FindObjectOfType<PlayerControler>();
+        thePlayer = FindObjectOfType<PlayerController>();
 
         coinText.text = "Coins: " + coinCount;
 
@@ -155,7 +156,15 @@ public class LevelManager : MonoBehaviour
          healthCount -= damageToTake;
          UpdateHeartMeter();
 
-         thePlayer.knockback();
+            coinCount -= coinsToTake;
+            coinText.text = "Coins: " + coinCount;
+            if(coinCount < 0)
+            {
+                coinCount = 0;
+                coinText.text = "Coins: " + coinCount;
+            }
+
+            thePlayer.knockback();
 
             thePlayer.hurtSound.Play();
         }  

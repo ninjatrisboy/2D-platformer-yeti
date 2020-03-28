@@ -8,6 +8,9 @@ public class HurtPlayer : MonoBehaviour
 
     public int damageToGive;
 
+    public int coinsToTake;
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,11 @@ public class HurtPlayer : MonoBehaviour
             //theLevelManager.Respawn();
 
             theLevelManager.HurtPlayer(damageToGive);
+            theLevelManager.HurtPlayer(coinsToTake);
+
+
+
+
         }
     }
 }

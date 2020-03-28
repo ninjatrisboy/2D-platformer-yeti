@@ -10,31 +10,37 @@ public class CameraController : MonoBehaviour
     private Vector3 targetPosition;
 
     public float smoothing;
+
+    public bool followTarget;
     
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        followTarget = (true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        targetPosition = new Vector3(target.transform.position.x, transform.position.y, transform.position.z);
+            if (followTarget)
+            {
+                targetPosition = new Vector3(target.transform.position.x, transform.position.y, transform.position.z);
 
-        if (target.transform.localScale.x > 0f)
-        {
-            targetPosition = new Vector3(targetPosition.x + followAhead, targetPosition.y, targetPosition.z);
+                if (target.transform.localScale.x > 0f)
+                {
+                    targetPosition = new Vector3(targetPosition.x + followAhead, targetPosition.y, targetPosition.z);
 
-        } else {
-            targetPosition = new Vector3(targetPosition.x - followAhead, targetPosition.y, targetPosition.z);
+                }
+                else
+                {
+                    targetPosition = new Vector3(targetPosition.x - followAhead, targetPosition.y, targetPosition.z);
 
+                }
+
+                //transform.position = targetPosition;
+
+                transform.position = Vector3.Lerp(transform.position, targetPosition, smoothing * Time.deltaTime);
+            }
         }
-
-        //transform.position = targetPosition;
-
-        transform.position = Vector3.Lerp(transform.position, targetPosition, smoothing * Time.deltaTime);
-        
-    }
 }

@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControler : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
 
     public float moveSpeed;
-    private Rigidbody2D myRigidbody;
+    private float activeMoveSpeed;
+
+    public bool canMove;
+
+  public Rigidbody2D myRigidbody;
 
     public float jumpSpeed;
 
@@ -34,6 +38,11 @@ public class PlayerControler : MonoBehaviour
     public AudioSource jumpSound;
     public AudioSource hurtSound;
 
+   private bool onPlatform;
+    public float onPlatformSpeedModifier;
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +53,10 @@ public class PlayerControler : MonoBehaviour
         respawnPosition = transform.position;
 
         theLevelManager = FindObjectOfType<LevelManager>();
+
+        activeMoveSpeed = moveSpeed;
+
+        canMove = (true);
     }   
 
     // Update is called once per frame
@@ -52,17 +65,24 @@ public class PlayerControler : MonoBehaviour
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
 
-        if (knockBackCounter <= 0)
+        if (knockBackCounter <= 0 && canMove)
         {
+
+            if(onPlatform)
+            {
+                activeMoveSpeed = moveSpeed * onPlatformSpeedModifier;
+            }  else{
+                activeMoveSpeed = moveSpeed;
+            }
 
             if (Input.GetAxisRaw("Horizontal") > 0f)
             {
-                myRigidbody.velocity = new Vector3(moveSpeed, myRigidbody.velocity.y, 0f);
+                myRigidbody.velocity = new Vector3(activeMoveSpeed, myRigidbody.velocity.y, 0f);
                 transform.localScale = new Vector3(1f, 1f, 1f);
             }
             else if (Input.GetAxisRaw("Horizontal") < 0f)
             {
-                myRigidbody.velocity = new Vector3(-moveSpeed, myRigidbody.velocity.y, 0f);
+                myRigidbody.velocity = new Vector3(-activeMoveSpeed, myRigidbody.velocity.y, 0f);
                 transform.localScale = new Vector3(-1f, 1f, 1f);
             }
             else
@@ -150,6 +170,7 @@ public class PlayerControler : MonoBehaviour
         {
             transform.parent = other.transform;
 
+            onPlatform = (true);
         }
     }
     void OnCollisionExit2D(Collision2D other)
@@ -157,6 +178,7 @@ public class PlayerControler : MonoBehaviour
        if(other.gameObject.tag == "MovingPlatform")
         {
             transform.parent = null;
+            onPlatform = (false);
         }
     }
 }
