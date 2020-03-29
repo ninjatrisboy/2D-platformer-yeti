@@ -61,11 +61,26 @@ public class LevelManager : MonoBehaviour
     {
         thePlayer = FindObjectOfType<PlayerController>();
 
-        coinText.text = "Coins: " + coinCount;
+
+        if(PlayerPrefs.HasKey("CoinCount"))
+        {
+            coinCount = PlayerPrefs.GetInt("CoinCount");
+        }
 
         healthCount = maxHealth;
 
         objectsToReset = FindObjectsOfType<ResetOnRespawn>();
+
+        coinCount = 0;
+
+        coinText.text = "Coins: " + coinCount;
+
+        if (PlayerPrefs.HasKey("PlayerLives"))
+        {
+             currentLives = PlayerPrefs.GetInt("PlayerLives");
+        }else{
+            currentLives = startingLives;
+        }
 
         currentLives = startingLives;
         livesText.text = "Lives x " + currentLives;

@@ -58,7 +58,13 @@ public class LevelEnd : MonoBehaviour
         theCamera.followTarget = false;
         theLevelManager.invincible = true;
 
+        theLevelManager.levelMusic.Stop();
+        theLevelManager.gameOverMusic.Play();
+
         thePlayer.myRigidbody.velocity = Vector3.zero;
+
+        PlayerPrefs.SetInt("CoinCount", theLevelManager.coinCount);
+        PlayerPrefs.SetInt("PlayerLives", theLevelManager.currentLives);
 
         yield return new WaitForSeconds(waitToMove);
 
