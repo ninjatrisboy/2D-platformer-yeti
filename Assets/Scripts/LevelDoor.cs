@@ -6,13 +6,43 @@ using UnityEngine.SceneManagement;
 public class LevelDoor : MonoBehaviour
 {
     public string levelToLoad;
-    private bool isColliding;
-   
+    
+    public bool unlocked;
+
+    public Sprite doorBottomOpen;
+    public Sprite doorTopOpen;
+    public Sprite doorBottomClosed;
+    public Sprite doorTopClosed;
+
+    public SpriteRenderer doorTop;
+    public SpriteRenderer doorBottom;
+
+  
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
+        PlayerPrefs.SetInt("Level1", 1);
+        if(PlayerPrefs.GetInt(levelToLoad) == 1)
+        {
+            unlocked = true;
+        }
+        else
+        {
+            unlocked = false;
+        }
+
+       if(unlocked)
+        {
+            doorTop.sprite = doorTopOpen;
+            doorBottom.sprite = doorBottomOpen;
+        } else {
+            doorTop.sprite = doorTopClosed;
+            doorBottom.sprite = doorBottomClosed;
+        }
     }
 
     // Update is called once per frame
@@ -26,21 +56,10 @@ public class LevelDoor : MonoBehaviour
    {
       if(other.tag == "Player")
       {            
-        if(Input.GetButtonDown("Submit")&& isColliding == true)
+        if(Input.GetButton("Jump")&& unlocked)
         {
-            print("load next level");
             SceneManager.LoadScene(levelToLoad);
         }
       }
    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        isColliding = true;
-    }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        isColliding = false;
-    }
 }

@@ -8323,6 +8323,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5977427075783185279, guid: 9de98d41687374911b2033a309a3a5b4,
+        type: 3}
+      propertyPath: levelToUnlock
+      value: Level2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9de98d41687374911b2033a309a3a5b4, type: 3}
 --- !u!1001 &6847211437392075050
@@ -8391,16 +8396,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Level Starter Pack
-      objectReference: {fileID: 0}
-    - target: {fileID: 6847211437275847674, guid: 0f9b01a18d3314ea390e5e50dbdddbad,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6847211437382545322, guid: 0f9b01a18d3314ea390e5e50dbdddbad,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f9b01a18d3314ea390e5e50dbdddbad, type: 3}
